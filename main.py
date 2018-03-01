@@ -2,7 +2,8 @@ from game.grid import GameGrid
 
 
 def main():
-    grid = GameGrid()
+    grid = GameGrid(10, 10)
+    print(grid.matrix)
     print('alo')
 
 
