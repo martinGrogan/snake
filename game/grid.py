@@ -1,11 +1,11 @@
 import numpy
 import random
+import math
 
 from .exceptions import *
 from .enums import Cell, Direction
 
 MIN_SIZE = 4
-DEFAULT_SNAKE_WIDTH = 3
 
 
 class GameGrid:
@@ -19,7 +19,7 @@ class GameGrid:
         self.matrix = numpy.empty((line_num, col_num,), dtype=int)
         self.matrix[:] = 0
 
-    def generate_snake(self, width=DEFAULT_SNAKE_WIDTH):
+    def generate_snake(self, width):
         if width >= self.col_num:
             raise SizeError('snake base length should be less than %d' % self.col_num)
         if width < 1:
@@ -51,6 +51,8 @@ class GameGrid:
 
         if dst != Cell.APPLE:
             self.matrix[self.matrix > 0] -= 1
+
+        return dst
 
     def snake_head(self):
         indices = numpy.where(self.matrix == self.matrix.max())
