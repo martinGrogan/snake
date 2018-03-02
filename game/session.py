@@ -5,8 +5,8 @@ from .grid import GameGrid
 from .enums import Direction, Cell
 from .exceptions import ObstacleCollision
 
-DEFAULT_WIDTH = 10
-DEFAULT_HEIGHT = 10
+DEFAULT_WIDTH = 50
+DEFAULT_HEIGHT = 50
 DEFAULT_SNAKE_WIDTH = 3
 
 

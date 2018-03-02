@@ -1,12 +1,15 @@
 from game.session import GameSession
+import os
+import time
 
 
 def main():
     session = GameSession()
     i = 0
     while session.next():
-        print(session.matrix())
-        print()
+        time.sleep(.3)
+        os.system('clear')
+        print(session.grid)
         i += 1
         if i & 5 == 0:
             session.change_direction((i % 4) + 1)
