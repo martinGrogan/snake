@@ -5,7 +5,7 @@ from .grid import GameGrid
 from .enums import Direction, Cell
 from .exceptions import ObstacleCollision
 
-DEFAULT_WIDTH = 50
+DEFAULT_WIDTH = 70
 DEFAULT_HEIGHT = 50
 DEFAULT_SNAKE_WIDTH = 3
 
@@ -13,7 +13,7 @@ DEFAULT_SNAKE_WIDTH = 3
 class GameSession:
 
     def __init__(self, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, snake_width=DEFAULT_SNAKE_WIDTH):
-        self.grid = GameGrid(width, height)
+        self.grid = GameGrid(height, width)
         self.grid.generate_snake(snake_width)
         self.direction = Direction.EAST
         self.grid.generate_apple()
@@ -31,7 +31,7 @@ class GameSession:
         if direction % 2 != self.direction % 2:
             self.direction = direction
 
-    def next(self):
+    def step(self):
         try:
             cell = self.grid.move_snake(self.direction)
             if cell == Cell.APPLE:
@@ -51,3 +51,6 @@ class GameSession:
 
     def get_score(self):
         return self.score
+
+    def __str__(self):
+        return self.grid.__str__()

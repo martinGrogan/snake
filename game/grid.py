@@ -2,11 +2,15 @@ import numpy as np
 import random
 from termcolor import colored
 
-
 from .exceptions import *
 from .enums import Cell, Direction
 
 MIN_SIZE = 4
+
+BORDER = colored(' ', 'white', 'on_white')
+EMPTY_CELL = '  '
+APPLE_CELL = colored('  ', 'red', 'on_red')
+SNAKE_CELL = colored('  ', 'green', 'on_green')
 
 
 class GameGrid:
@@ -57,7 +61,7 @@ class GameGrid:
 
     def snake_head(self):
         indices = np.where(self.matrix == self.matrix.max())
-        return tuple(map(lambda x:  x[0], indices))
+        return tuple(map(lambda x: x[0], indices))
 
     def snake_length(self):
         return self.matrix.max()
@@ -68,18 +72,19 @@ class GameGrid:
         return self.matrix.__getitem__(pos)
 
     def __str__(self):
-        str = ''
+        real_width = self.col_num * 2 + 2
+        view = top_border(real_width)
         for line in self.matrix:
+            view += BORDER
             for cell in line:
                 if cell == Cell.EMPTY:
-                    str += ' '
+                    view += EMPTY_CELL
                 elif cell == Cell.APPLE:
-                    str += colored('  ', 'red', 'on_red')
+                    view += APPLE_CELL
                 else:
-                    str += colored('  ', 'green', 'on_green')
-            str += '\n'
-        return str
-
+                    view += SNAKE_CELL
+            view += BORDER + '\n'
+        return view + bottom_border(real_width)
 
     @staticmethod
     def calculate_new_position(head, direction):
@@ -92,3 +97,11 @@ class GameGrid:
             return head[0] + 1, head[1]
         elif direction == Direction.WEST:
             return head[0], head[1] - 1
+
+
+def top_border(width):
+    return '%s\n' % (BORDER * width)
+
+
+def bottom_border(width):
+    return top_border(width)
