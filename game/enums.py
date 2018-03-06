@@ -13,3 +13,10 @@ class Direction(enum.IntEnum):
     SOUTH = enum.auto()
     WEST = enum.auto()
 
+
+@enum.unique
+class UiCell(enum.IntEnum):
+    EMPTY = 0
+    APPLE = 1
+    SNAKE = 2
+    BORDER = 3

@@ -71,21 +71,6 @@ class GameGrid:
             raise WallCollision('invalid point (%d, %d)' % pos)
         return self.matrix.__getitem__(pos)
 
-    def __str__(self):
-        real_width = self.col_num * 2 + 2
-        view = top_border(real_width)
-        for line in self.matrix:
-            view += BORDER
-            for cell in line:
-                if cell == Cell.EMPTY:
-                    view += EMPTY_CELL
-                elif cell == Cell.APPLE:
-                    view += APPLE_CELL
-                else:
-                    view += SNAKE_CELL
-            view += BORDER + '\n'
-        return view + bottom_border(real_width)
-
     @staticmethod
     def calculate_new_position(head, direction):
         Direction(direction)

@@ -10,7 +10,7 @@ DEFAULT_HEIGHT = 50
 DEFAULT_SNAKE_WIDTH = 3
 
 
-class GameSession:
+class GameState:
 
     def __init__(self, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, snake_width=DEFAULT_SNAKE_WIDTH):
         self.grid = GameGrid(height, width)
